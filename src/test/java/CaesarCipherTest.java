@@ -25,7 +25,7 @@ class CaesarCipherTest {
 
     @Test
     public void encrypt4() {
-        assertEquals(caesar.encrypt("Δ", 3),"");
+        assertEquals(caesar.encrypt("Δ", 0),"");
     }
 
     @Test
@@ -35,11 +35,11 @@ class CaesarCipherTest {
 
     @Test
     public void decrypt2() {
-        assertEquals(caesar.encrypt("def", 29),"abc");
+        assertEquals(caesar.decrypt("def", 29),"abc");
     }
 
     @Test
     public void decrypt3() {
-        assertEquals(caesar.encrypt("crr", 3),"zoo");
+        assertEquals(caesar.decrypt("crr", 3),"zoo");
     }
 }
