@@ -1,21 +1,21 @@
 public class CaesarCipher {
 
-    private String alphabet = "abcdefghijklmnopqrstuvwxyz";
+    private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";//26
 
-    public String encrypt(String message, int key){
-        String answer = "";
-        for (int i = 0; i < message.length(); i++) {
-           char charAt = message.charAt(i);
-           int index = alphabet.indexOf(charAt);
-           int newIndex = index + key;
-           char newChar = alphabet.charAt(newIndex);
-           answer += newChar;
-
+    public String encrypt(String message, int key) {
+        StringBuilder builder = new StringBuilder();
+        for (char aChar : message.toCharArray()) {
+            int index = ALPHABET.indexOf(aChar);
+            if (index >= 0) {
+                int newIndex = (index + key) % ALPHABET.length();
+                char charAt = ALPHABET.charAt(newIndex < 0 ? newIndex + ALPHABET.length() : newIndex);
+                builder.append(charAt);
+            }
         }
-        return answer;
+        return builder.toString();
     }
 
-    public String decrypt(String message, int key){
-        return encrypt(message, key * (-1));=[]
+    public String decrypt(String message, int key) {
+        return encrypt(message, key * (-1));
     }
 }
