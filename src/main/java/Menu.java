@@ -13,8 +13,8 @@ public class Menu {
 
             String answer = scanner.nextLine();
             switch (answer){
-                case "1" -> System.out.println("Зашифровать текст");
-                case "2" -> System.out.println("Дешифровать текст");
+                case "1" -> new Encrypted().encrypted();
+                case "2" -> new Decrypted().decrypted();
                 case "3" -> System.out.println("Подобрать ключ");
                 case "4" -> System.out.println("Сентаксичекский анализ");
                 case "5" -> {
