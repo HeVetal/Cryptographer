@@ -1,9 +1,7 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class Util {
-    private Util(){
+    private Util() {
 
     }
 
@@ -11,11 +9,27 @@ public class Util {
 
     public static String readerString() {
         String str;
-        try  {
+        try {
             str = br.readLine();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         return str;
+    }
+
+    static {
+
+        File file = new File("C:/path/to/myfile.txt");
+
+        String nameFile = file.getName();
+        int lastIndex = nameFile.lastIndexOf('.');
+        if(lastIndex != -1){
+            nameFile = nameFile.substring(0, lastIndex);
+            System.out.println(nameFile);
+        }
+
+        if(!nameFile.contains("Encrypted")){
+            nameFile = nameFile + "Encrypted.txt";
+        }
     }
 }

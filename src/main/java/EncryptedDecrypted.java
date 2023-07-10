@@ -33,9 +33,7 @@ public class EncryptedDecrypted {
                     String decrypted = caesarCipher.decrypt(str, key);
                     writer.write(decrypted + "\n");
                 }
-
             }
-
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -45,8 +43,6 @@ public class EncryptedDecrypted {
         } else {
             System.out.println("Содержимое файла расшифровано");
         }
-
-
     }
 
 }
