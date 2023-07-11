@@ -1,48 +1,30 @@
+import lombok.SneakyThrows;
+
 import java.io.*;
-import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class EncryptedDecrypted {
-    private boolean flag = false;
 
-    public EncryptedDecrypted(boolean flag) {
-        this.flag = flag;
-    }
+    private final CaesarCipher caesarCipher = new CaesarCipher();
 
-    private CaesarCipher caesarCipher = new CaesarCipher();
+    @SneakyThrows
+    public void encryptedDecrypted(boolean flag) {
 
-    public void encryptedDecrypted() {
-        if (flag) {
-            System.out.println("Введите путь к файлу для его зашифровки");
-        } else {
-            System.out.println("Введите путь к файлу для его расшифровки");
-        }
+        Util.writeMessage("Введите путь к файлу для его " + (flag ? "зашифровки" : "расшифровки"));
         String path = Util.readerString();
-        System.out.println("Введите ключ");
-        int key = Integer.parseInt(Util.readerString());
-        System.out.println("Ведите путь куда записать файл");
-        String path2 = Util.readerString();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(path));
-             BufferedWriter writer = new BufferedWriter(new FileWriter(path2))) {
+        Util.writeMessage("Введите ключ");
+        int key = Util.readInt();
+        Path dest = Util.builderFileName(path, flag ? "_encrypted" : "_decrypted");
+        try (BufferedReader reader = Files.newBufferedReader(Path.of(path));
+             BufferedWriter writer = Files.newBufferedWriter(dest)) {
             while (reader.ready()) {
                 String str = reader.readLine();
-                if (flag) {
-                    String encrypted = caesarCipher.encrypt(str, key);
-                    writer.write(encrypted + "\n");
-                } else {
-                    String decrypted = caesarCipher.decrypt(str, key);
-                    writer.write(decrypted + "\n");
-                }
+                String encryptedDecrypted = flag ? caesarCipher.encrypt(str, key) : caesarCipher.decrypt(str, key);
+                writer.write(encryptedDecrypted);
+                writer.newLine();
             }
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
-        if (flag) {
-            System.out.println("Содержимое файла зашифровано");
-        } else {
-            System.out.println("Содержимое файла расшифровано");
-        }
+        Util.writeMessage("Содержимое файла " + (flag ? "зашифровано" : "расшифровано"));
     }
-
 }
