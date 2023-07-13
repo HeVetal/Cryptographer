@@ -18,10 +18,12 @@ public class Bruteforce {
 
         try (BufferedReader reader = Files.newBufferedReader(Path.of(path));
              BufferedWriter writer = Files.newBufferedWriter(bruteforce))   {
-            StringBuilder text;
+            StringBuilder text = new StringBuilder();
             while (reader.ready()){
-
+                text.append(reader.readLine());
+                text.append(System.lineSeparator());
             }
+            writer.write(text.toString());
         }
 
     }
