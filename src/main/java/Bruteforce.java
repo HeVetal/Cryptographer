@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Bruteforce {
 
@@ -19,13 +21,20 @@ public class Bruteforce {
         try (BufferedReader reader = Files.newBufferedReader(Path.of(path));
              BufferedWriter writer = Files.newBufferedWriter(bruteforce)) {
             StringBuilder builder = new StringBuilder();
+            List<String> list = new ArrayList<>();
             while (reader.ready()) {
-                builder.append(reader.readLine()).append(System.lineSeparator());
+                String string = reader.readLine();
+                builder.append(string).append(System.lineSeparator());
+                list.add(string);
             }
             for (int i = 0; i < caesar.alphabetLength(); i++) {
                 String decrypt = caesar.decrypt(builder.toString(), i);
                 if (isValidateText(decrypt)) {
-                    writer.write(decrypt);
+                    for (String string : list) {
+                        String encrypt = caesar.decrypt(string, i);
+                        writer.write(encrypt);
+                        writer.newLine();
+                    }
                     Util.writeMessage("Содержимое файла рашифровано, ключ равен " + i);
                     break;
                 }
