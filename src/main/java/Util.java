@@ -1,13 +1,13 @@
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import java.io.*;
 import java.nio.file.Path;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Util {
 
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-    private Util() {
-
-    }
 
     public static void writeMessage(String message) {
         System.out.println(message);
