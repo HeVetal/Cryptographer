@@ -1,4 +1,3 @@
-import java.util.Scanner;
 
 public class Menu {
     public static void main(String[] args) {
@@ -11,11 +10,11 @@ public class Menu {
                     "5. Выйти из программы");
 
             String answer = Util.readerString();
-            switch (answer){
+            switch (answer) {
                 case "1" -> new EncryptedDecrypted().encryptedDecrypted(true);
                 case "2" -> new EncryptedDecrypted().encryptedDecrypted(false);
                 case "3" -> new Bruteforce().bruteforce();
-                case "4" -> Util.writeMessage("Сентаксичекский анализ");
+                case "4" -> new Parsing().parse();
                 case "5" -> {
                     return;
                 }
