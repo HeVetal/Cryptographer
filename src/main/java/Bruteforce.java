@@ -45,8 +45,8 @@ public class Bruteforce {
     private boolean isValidateText(String text) {
         boolean isValidate = false;
         String[] words = text.split(" ");
-        for (int i = 0; i < words.length; i++) {
-            if (words[i].length() > MAX_LENGTH_WORD) {
+        for (String word : words) {
+            if (word.length() > MAX_LENGTH_WORD) {
                 return false;
             }
         }
