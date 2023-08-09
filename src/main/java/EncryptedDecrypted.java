@@ -16,15 +16,24 @@ public class EncryptedDecrypted {
         Util.writeMessage("Введите ключ");
         int key = Util.readInt();
         Path dest = Util.builderFileName(path, flag ? "_encrypted" : "_decrypted");
-        try (BufferedReader reader = Files.newBufferedReader(Path.of(path));
-             BufferedWriter writer = Files.newBufferedWriter(dest)) {
-            while (reader.ready()) {
-                String str = reader.readLine();
-                String encryptedDecrypted = flag ? caesarCipher.encrypt(str, key) : caesarCipher.decrypt(str, key);
-                writer.write(encryptedDecrypted);
-                writer.newLine();
+        try
+        {
+            String str = Files.readString(Path.of(path));
+            String[] strMass = str.split("\n");
+            StringBuilder var = new StringBuilder();
+            for (int i = 0; i < strMass.length; i++) {
+                String encryptedDecrypted = flag ? caesarCipher.encrypt(strMass[i], key) : caesarCipher.decrypt(strMass[i], key);
+                encryptedDecrypted += System.lineSeparator();
+                var.append(encryptedDecrypted);
+
             }
+            Files.writeString(dest, var);
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         Util.writeMessage("Содержимое файла " + (flag ? "зашифровано" : "расшифровано"));
+        Util.writeMessage(String.valueOf(dest));
     }
 }
