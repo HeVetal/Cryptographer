@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Bruteforce {
 
@@ -54,7 +55,8 @@ public class Bruteforce {
             isValidate = true;
         }
         while (isValidate) {
-            Util.writeMessage("Текст коректный? " + text.substring(text.length()/2, text.length()/2 + 100));
+            int start = new Random().nextInt(text.length()/2);
+            Util.writeMessage("Текст коректный? " + text.substring(start, start + (int) Math.sqrt( text.length())));
             Util.writeMessage("Если корректный текст введите Y/N");
             String answerUser = Util.readerString();
             if (answerUser.equalsIgnoreCase("Y")) {
