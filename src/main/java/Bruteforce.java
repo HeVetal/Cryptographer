@@ -54,7 +54,7 @@ public class Bruteforce {
             isValidate = true;
         }
         while (isValidate) {
-            Util.writeMessage("Текст коректный? " + text);//.substring(text.length()/2, text.length()/2 + 100));
+            Util.writeMessage("Текст коректный? " + text.substring(text.length()/2, text.length()/2 + 100));
             Util.writeMessage("Если корректный текст введите Y/N");
             String answerUser = Util.readerString();
             if (answerUser.equalsIgnoreCase("Y")) {
